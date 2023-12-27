@@ -1,6 +1,7 @@
 import { Children, Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
 const user = {
   name: "Tom Cook",
@@ -11,11 +12,13 @@ const user = {
 const navigation = [
   { name: "Home", href: "#", current: true },
   { name: "Shop", href: "#", current: false },
+  { name: "Blog", href: "#", current: false },
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#" },
+  { name: "Login", href: "/login" },
   { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "SignUp", href: "/signup" },
 ];
 
 function classNames(...classes) {
@@ -38,16 +41,16 @@ export default function NavBar({ children }) {
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation.map((item) => (
-                          <a
+                          <Link
                             key={item.name}
-                            href={item.href}
+                            to={item.href}
                             className={classNames(
                               item.current ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
                               "rounded-md px-3 py-2 text-sm font-medium"
                             )}
                             aria-current={item.current ? "page" : undefined}>
                             {item.name}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -84,11 +87,11 @@ export default function NavBar({ children }) {
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
-                                  <a
-                                    href={item.href}
+                                  <Link
+                                    to={item.href}
                                     className={classNames(active ? "bg-gray-100" : "", "block px-4 py-2 text-sm text-gray-700")}>
                                     {item.name}
-                                  </a>
+                                  </Link>
                                 )}
                               </Menu.Item>
                             ))}
